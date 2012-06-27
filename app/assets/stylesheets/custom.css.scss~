@@ -1,5 +1,6 @@
 @import "bootstrap";
-
+$navbarBackground:                $orange !default;
+$navbarBackgroundHighlight:       $orange !default;
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
@@ -17,6 +18,10 @@ body {
 
 section {
   overflow: auto;
+}
+
+navbar-inner{
+ background-color: $orange;
 }
 
 textarea {

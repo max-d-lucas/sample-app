@@ -11,6 +11,7 @@ group :development, :test do
   gem 'guard-spork', '0.3.2'
   gem 'spork', '0.9.0'
   gem 'annotate', '~> 2.4.1.beta'
+  gem 'factory_girl_rails', '1.4.0'
 end
 
 # Gems used only for assets and not required

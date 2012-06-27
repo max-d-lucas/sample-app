@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
     before do
-        @user = User.new(name: "Example User", email: "user@example.com", password:"Password_1", password_confirmation:"Password_1") 
+        @user = User.new(name: "Example User", email: "user@example.com", password:"Password1", password_confirmation:"Password1") 
     end
 
     subject { @user }
@@ -13,19 +13,20 @@ describe User do
         it { should respond_to(:password_digest) }    
         it { should respond_to(:password) }    
         it { should respond_to(:password_confirmation) }    
-        it { should respond_to(:authenticate) }
+        it { should respond_to(:remember_token) }
+        it { should respond_to(:authenticate) } 
 
         it { should be_valid }  
     end
     describe "when password is not present" do
       before { @user.password = @user.password_confirmation = " " }
       it { should_not be_valid }
-      after { @user.password = @user.password_confirmation = "Password_1" }
+      after { @user.password = @user.password_confirmation = "Password1" }
     end
     describe "when password doesn't match confirmation" do
       before { @user.password_confirmation = "mismatch" }
       it { should_not be_valid }
-      after { @user.password = @user.password_confirmation = "Password_1" }
+      after { @user.password = @user.password_confirmation = "Password1" }
     end    
     describe "when password confirmation is nil" do
       before { @user.password_confirmation = nil }
@@ -35,42 +36,42 @@ describe User do
     describe "with a password that's too short" do
       before { @user.password = @user.password_confirmation = "Aa12345" }
       it { should be_invalid }
-      after { @user.password = @user.password_confirmation = "Password_1" }
+      after { @user.password = @user.password_confirmation = "Password1" }
     end    
     describe "with a password that's too long" do
       before { @user.password = @user.password_confirmation = "Aa1" * 26 }
       it { should be_invalid }
-      after { @user.password = @user.password_confirmation = "Password_1" }
+      after { @user.password = @user.password_confirmation = "Password1" }
     end        
     describe "with a password that's not mixed case, all lower" do
       before { @user.password = @user.password_confirmation = "1a" * 10 }
       it { should be_invalid }
-      after { @user.password = @user.password_confirmation = "Password_1" }
+      after { @user.password = @user.password_confirmation = "Password1" }
     end        
     describe "with a password that's not mixed case, all upper" do
       before { @user.password = @user.password_confirmation = "1A" * 10 }
       it { should be_invalid }
-      after { @user.password = @user.password_confirmation = "Password_1" }
+      after { @user.password = @user.password_confirmation = "Password1" }
     end        
     describe "with a password that's has no alpha characters" do
       before { @user.password = @user.password_confirmation = "1" * 10 }
       it { should be_invalid }
-      after { @user.password = @user.password_confirmation = "Password_1" }
+      after { @user.password = @user.password_confirmation = "Password1" }
     end        
     describe "with a password that's has no numeric characters" do
       before { @user.password = @user.password_confirmation = "Aa" * 5 }
       it { should be_invalid } 
-      after { @user.password = @user.password_confirmation = "Password_1" }
+      after { @user.password = @user.password_confirmation = "Password1" }
     end        
     describe "with a password that's has invalid characters" do
       before { @user.password = @user.password_confirmation = "Aa1!@#^&*()_+" }
       it { should be_invalid }
-      after { @user.password = @user.password_confirmation = "Password_1" }
+      after { @user.password = @user.password_confirmation = "Password1" }
     end        
     describe "with a password that matches email" do
       before { @user.password = @user.password_confirmation = @user.email }
       it { should be_invalid }
-      after { @user.password = @user.password_confirmation = "Password_1" }
+      after { @user.password = @user.password_confirmation = "Password1" }
     end        
 
     
